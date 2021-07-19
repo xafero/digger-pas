@@ -342,7 +342,7 @@ var
   chartab: array of Int16;
 begin
   dest := x + (y * Width);
-   
+
   ofs := 0;
   color := c and 3;
   ch  := ch - 32;

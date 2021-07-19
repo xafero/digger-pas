@@ -1,0 +1,8 @@
+object DiggerForm: TDiggerForm
+  Left = 323
+  Height = 830
+  Top = 122
+  Width = 1289
+  Caption = 'Digger Remastered'
+  LCLVersion = '2.0.12.0'
+end

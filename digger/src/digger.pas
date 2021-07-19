@@ -306,9 +306,9 @@ procedure TDigger.mydestroy;
 begin
   if assigned(gamethread) then
   begin
-     
+
     gamethread.Terminate();
-     
+
   end;
 end;
 
@@ -419,41 +419,41 @@ end;
 procedure TDigger.dodigger;
 begin
   newframe();
-   
+
   if expsn <> 0 then
   begin
-     
+
     drawexplosion();
   end
   else
   begin
-     
+
     updatefire();
   end;
-   
+
   if diggervisible then
   begin
     if digonscr then
     begin
       if digtime <> 0 then
       begin
-         
+
         Drawing.drawdigger(digmdir, diggerx, diggery, notfiring and
           (rechargetime = 0));
-         
+
         Main.incpenalty();
         Dec(mDigtime);
       end
       else
       begin
-         
+
         updatedigger();
-         
+
       end;
     end
     else
     begin
-       
+
       diggerdie();
     end;
   end;
@@ -656,7 +656,7 @@ begin
     end;
   end;
 
-  for i := 0 to (2-1) do
+  for i := 0 to (2 - 1) do
   begin
     pal := mPc.GetPal();
     model := TColorModel.Create(8, 4, pal[i][0], pal[i][1], pal[i][2]);
@@ -864,7 +864,7 @@ end;
 
 procedure TDigger.run;
 begin
-   
+
   Main.main();
 end;
 
@@ -934,25 +934,25 @@ begin
     begin
       Drawing.drawrightblob(diggerx, diggery);
       diggerx := diggerx + 4;
-       
+
     end;
     4:
     begin
       Drawing.drawleftblob(diggerx, diggery);
       diggerx := diggerx - 4;
-       
+
     end;
     2:
     begin
       Drawing.drawtopblob(diggerx, diggery);
       diggery := diggery - 3;
-       
+
     end;
     6:
     begin
       Drawing.drawbottomblob(diggerx, diggery);
       diggery := diggery + 3;
-       
+
     end;
   end;
   if hitemerald(trunc((diggerx - 12) / 20), trunc((diggery - 18) / 18),
@@ -1097,8 +1097,8 @@ begin
     Main.incpenalty();
     if (clbits and $3F00) <> 0 then
     begin
-      b := 256;      
-      for mon := 0 to (6-1) do
+      b := 256;
+      for mon := 0 to (6 - 1) do
       begin
         if (clbits and b) <> 0 then
         begin

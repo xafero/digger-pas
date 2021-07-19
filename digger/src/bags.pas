@@ -183,48 +183,48 @@ begin
   bag := 0;
   soundfalloffflag := True;
   soundwobbleoffflag := True;
-   
+
   for bag := 1 to (8 - 1) do
   begin
-    
+
     if bagdat[bag].exist then
     begin
       if bagdat[bag].gt <> 0 then
       begin
         if bagdat[bag].gt = 1 then
         begin
-          
+
           dig.Sound.soundbreak();
           dig.Drawing.drawgold(bag, 4, bagdat[bag].x, bagdat[bag].y);
           dig.Main.incpenalty();
         end;
         if bagdat[bag].gt = 3 then
         begin
-          
+
           dig.Drawing.drawgold(bag, 5, bagdat[bag].x, bagdat[bag].y);
           dig.Main.incpenalty();
         end;
         if bagdat[bag].gt = 5 then
         begin
-           
+
           dig.Drawing.drawgold(bag, 6, bagdat[bag].x, bagdat[bag].y);
           dig.Main.incpenalty();
         end;
         Inc(bagdat[bag].gt);
         if bagdat[bag].gt = goldtime then
         begin
-           
+
           removebag(bag);
         end
         else
         begin
           if (bagdat[bag].v < 9) and (bagdat[bag].gt < (goldtime - 10)) then
           begin
-             
+
             if (dig.Monster.getfield(bagdat[bag].h, bagdat[bag].v + 1) and
               $2000) = 0 then
             begin
-               
+
               bagdat[bag].gt := goldtime - 10;
             end;
           end;
@@ -232,38 +232,38 @@ begin
       end
       else
       begin
-         
+
         updatebag(bag);
-         
+
       end;
     end;
   end;
- 
+
   for bag := 1 to (8 - 1) do
   begin
-    
+
     if (bagdat[bag].dir = 6) and bagdat[bag].exist then
     begin
       soundfalloffflag := False;
     end;
-     
+
     if (bagdat[bag].dir <> 6) and bagdat[bag].wobbling and bagdat[bag].exist then
     begin
       soundwobbleoffflag := False;
     end;
-     
+
   end;
   if soundfalloffflag then
   begin
-     
+
     dig.Sound.soundfalloff();
   end;
   if soundwobbleoffflag then
   begin
-     
+
     dig.Sound.soundwobbleoff();
   end;
-   
+
 end;
 
 procedure TBags.drawbags;
@@ -605,7 +605,7 @@ begin
   case bagdat[bag].dir of
     -1:
     begin
-       
+
       if (y < 180) and (xr = 0) then
       begin
         if bagdat[bag].wobbling then
@@ -613,7 +613,7 @@ begin
           if bagdat[bag].wt = 0 then
           begin
             bagdat[bag].dir := 6;
-             
+
             dig.Sound.soundfall();
             goto BreakOut;
           end;
@@ -621,21 +621,21 @@ begin
           wbl := bagdat[bag].wt mod 8;
           if not (wbl and 1) <> 0 then
           begin
-             
+
             dig.Drawing.drawgold(bag, wblanim[wbl shr 1], x, y);
-             
+
             dig.Main.incpenalty();
-             
+
             dig.Sound.soundwobble();
-             
+
           end;
         end
         else
         begin
-           
+
           if (dig.Monster.getfield(h, v + 1) and $FDF) <> $FDF then
           begin
-             
+
             if not dig.checkdiggerunderbag(h, v + 1) then
             begin
               bagdat[bag].wobbling := True;
@@ -662,12 +662,12 @@ begin
           begin
             bagdat[bag].dir := 6;
             bagdat[bag].wt  := 0;
-             
+
             dig.Sound.soundfall();
           end
           else
           begin
-             
+
             baghitground(bag);
           end;
         end;
@@ -680,7 +680,7 @@ begin
       end;
       if y >= 180 then
       begin
-         
+
         baghitground(bag);
       end
       else
@@ -689,12 +689,12 @@ begin
         begin
           if yr = 0 then
           begin
-             
+
             baghitground(bag);
           end;
         end;
       end;
-       
+
       dig.Monster.checkmonscared(bagdat[bag].h);
     end;
   end;
@@ -707,7 +707,7 @@ begin
       end
       else
       begin
-         
+
         pushbag(bag, bagdat[bag].dir);
       end;
     end;

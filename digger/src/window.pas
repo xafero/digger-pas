@@ -123,13 +123,13 @@ end;
 procedure TDiggerForm.newPixels(x: integer; y: integer; w: integer; h: integer);
 begin
   self.Invalidate();
-   
+
 end;
 
 procedure TDiggerForm.newPixelsAll();
 begin
   self.Invalidate();
-   
+
 end;
 
 procedure TDiggerForm.setAnimated(val: boolean);
@@ -202,9 +202,9 @@ end;
 
 procedure TDiggerForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-   
+
   mDigger.mydestroy();
-   
+
 end;
 
 end.

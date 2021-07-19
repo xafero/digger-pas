@@ -182,7 +182,7 @@ var
 begin
   i := 0;
   clearrecf();
-  for i := 0 to (17-1) do
+  for i := 0 to (17 - 1) do
     sprrdrwf[i] := False;
 end;
 
@@ -191,7 +191,7 @@ var
   i: integer;
 begin
   i := 0;
-  for i := 0 to (17-1) do
+  for i := 0 to (17 - 1) do
     sprrecf[i] := False;
 end;
 
@@ -404,7 +404,7 @@ begin
   if not sprrecf[n] then
   begin
     sprrecf[n] := True;
-    for i := 0 to (16-1) do
+    for i := 0 to (16 - 1) do
       if sprenf[i] and (i <> n) then
       begin
         if collide(i, n) then

@@ -73,8 +73,8 @@ var
   b: integer;
 begin
   m := 0;
-  b := 256;  
-  for m := 0 to (6-1) do
+  b := 256;
+  for m := 0 to (6 - 1) do
   begin
     if ((bits and b) <> 0) and (mondat[mon].dir = mondat[m].dir) and
       (mondat[m].stime = 0) and (mondat[mon].stime = 0) then
@@ -102,7 +102,7 @@ var
   i: integer;
 begin
   i := 0;
-  for i := 0 to (6-1) do
+  for i := 0 to (6 - 1) do
     if not mondat[i].flag then
     begin
       mondat[i].flag := True;
@@ -284,7 +284,7 @@ var
 begin
   m := 0;
   b := 256;
-  for m := 0 to (6-1) do
+  for m := 0 to (6 - 1) do
   begin
     if (bits and b) <> 0 then
     begin
@@ -378,7 +378,7 @@ begin
   m := 0;
   b := 256;
   n := 0;
-  for m := 0 to (6-1) do
+  for m := 0 to (6 - 1) do
   begin
     if (bits and b) <> 0 then
     begin
@@ -791,7 +791,7 @@ var
 begin
   m := 0;
   b := 256;
-  for m := 0 to (6-1) do
+  for m := 0 to (6 - 1) do
   begin
     if (bits and b) <> 0 then
     begin

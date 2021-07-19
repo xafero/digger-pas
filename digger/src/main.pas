@@ -152,19 +152,19 @@ end;
 
 procedure TMain.drawscreen;
 begin
-   
+
   dig.Drawing.creatembspr();
-   
+
   dig.Drawing.drawstatics();
-   
+
   dig.Bags.drawbags();
-   
+
   dig.drawemeralds();
-   
+
   dig.initdigger();
-   
+
   dig.Monster.initmonsters();
-   
+
 end;
 
 function TMain.getcplayer: integer;
@@ -201,13 +201,13 @@ end;
 procedure TMain.initlevel;
 begin
   gamedat[curplayer].levdone := False;
-   
+
   dig.Drawing.makefield();
-   
+
   dig.makeemfield();
-   
+
   dig.Bags.initbags();
-   
+
   levnotdrawn := True;
 end;
 
@@ -244,7 +244,7 @@ var
   x: integer;
   start: boolean;
 begin
-   
+
   frame := 0;
   t := 0;
   x := 0;
@@ -261,29 +261,29 @@ begin
   dig.Scores.loadscores();
   dig.Sound.initsound();
   dig.Scores.run();
-   
+
   dig.Scores._updatescores(dig.Scores.scores);
   nplayers := 1;
-   
+
   repeat
     dig.Sound.soundstop();
-     
+
     dig.Sprite.setsprorder(digsprorder);
-     
+
     dig.Drawing.creatembspr();
-     
+
     dig.Input.detectjoy();
-     
+
     dig.Pc.gclear();
-     
+
     dig.Pc.gtitle();
-     
+
     dig.Drawing.outtext('D I G G E R', 100, 0, 3);
-     
+
     shownplayers();
-     
+
     dig.Scores.showtable();
-     
+
     start := False;
     frame := 0;
 
@@ -408,45 +408,45 @@ begin
     begin
       gamedat[1].lives := 0;
     end;
-     
+
     dig.Pc.gclear();
     curplayer := 0;
-     
+
     initlevel();
     curplayer := 1;
-     
+
     initlevel();
     dig.Scores.zeroscores();
     dig.bonusvisible := True;
-     
+
     if nplayers = 2 then
     begin
       flashplayer := True;
     end;
     curplayer := 0;
-     
+
     while (not TThread.CheckTerminated) and ((gamedat[0].lives <> 0) or
         (gamedat[1].lives <> 0)) and (not dig.Input.escape) do
     begin
       gamedat[curplayer].dead := False;
-       
+
       while (not TThread.CheckTerminated) and (not gamedat[curplayer].dead) and
         (gamedat[curplayer].lives <> 0) and (not dig.Input.escape) do
       begin
         dig.Drawing.initmbspr();
-         
+
         play();
-         
+
       end;
       if gamedat[1 - curplayer].lives <> 0 then
       begin
         curplayer := 1 - curplayer;
         levnotdrawn := True;
         flashplayer := True;
-         
+
       end;
     end;
-     
+
     dig.Input.escape := False;
   until TThread.CheckTerminated;
 end;
@@ -458,15 +458,15 @@ var
 begin
   t := 0;
   c := 0;
-   
+
   if levnotdrawn then
   begin
     levnotdrawn := False;
-     
+
     drawscreen();
-     
+
     dig.time := dig.Pc.gethrt();
-     
+
     if flashplayer then
     begin
       flashplayer := False;
@@ -479,9 +479,9 @@ begin
       begin
         pldispbuf := pldispbuf + '2';
       end;
-       
+
       cleartopline();
-       
+
       for t := 0 to (15 - 1) do
         for c := 1 to 3 do
         begin
@@ -493,104 +493,104 @@ begin
             exit;
           end;
         end;
-       
+
       dig.Scores.drawscores();
-       
+
       dig.Scores.addscore(0);
     end;
   end
   else
   begin
-     
+
     initchars();
   end;
-   
+
   dig.Input.keypressed := 0;
   dig.Drawing.outtext('        ', 108, 0, 3);
-   
+
   dig.Scores.initscores();
-   
+
   dig.Drawing.drawlives();
-   
+
   dig.Sound.music(1);
-   
+
   dig.Input.readdir();
-   
+
   dig.time := dig.Pc.gethrt();
-   
+
   while (not TThread.CheckTerminated) and (not gamedat[curplayer].dead) and
     (not gamedat[curplayer].levdone) and (not dig.Input.escape) do
   begin
-     
+
     penalty := 0;
-     
+
     dig.dodigger();
-     
+
     dig.Monster.domonsters();
-     
+
     dig.Bags.dobags();
-     
+
     if penalty > 8 then
     begin
-       
+
       dig.Monster.incmont(penalty - 8);
-       
+
     end;
-     
+
     testpause();
-     
+
     checklevdone();
-     
+
   end;
-   
+
   dig.erasedigger();
-   
+
   dig.Sound.musicoff();
-   
+
   t := 20;
   while (not TThread.CheckTerminated) and ((dig.Bags.getnmovingbags() <> 0) or
       (t <> 0)) and (not dig.Input.escape) do
   begin
-     
+
     if t <> 0 then
     begin
       Dec(t);
     end;
-     
+
     penalty := 0;
-     
+
     dig.Bags.dobags();
-     
+
     dig.dodigger();
-     
+
     dig.Monster.domonsters();
-     
+
     if penalty < 8 then
     begin
       t := 0;
     end;
-     
+
   end;
-   
+
   dig.Sound.soundstop();
-   
+
   dig.killfire();
-   
+
   dig.erasebonus();
-   
+
   dig.Bags.cleanupbags();
-   
+
   dig.Drawing.savefield();
-   
+
   dig.Monster.erasemonsters();
-   
+
   dig.newframe();
-   
+
   if gamedat[curplayer].levdone then
   begin
     dig.Sound.soundlevdone();
   end;
-   
+
   if dig.countem() = 0 then
   begin
     Inc(gamedat[curplayer].level);

@@ -230,7 +230,7 @@ end;
 
 procedure TInput.Key_leftpressed;
 begin
-   
+
   leftpressed := True;
   staticdir  := 4;
   dynamicdir := 4;
@@ -247,7 +247,7 @@ end;
 
 procedure TInput.Key_rightpressed;
 begin
-   
+
   rightpressed := True;
   staticdir  := 0;
   dynamicdir := 0;
